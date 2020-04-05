@@ -51,13 +51,42 @@ const char* rail2(const char* message,int a, int b)
     int oneCycle = 2*a + 2*b - 3; //number of letters in one 'cycle'
     int numCycles = (int)ceil((float)messageLen/oneCycle); //number of complete "W" shapes in the rail
     int numChars = numCycles * oneCycle - numCycles + 1; //this is the number of characters in the padded string
+    int peakIndex[numCycles + 1]; //This array will contain the index numbers for the peaks
+    int middlePeakIndex[numCycles]; //this array will cointain the index numbers of the middle peaks
 
     char charArray[numChars][a];
+    for(int i = 0; i < numChars; i++){
+        for(int j = 0; j < a; j++){
+            charArray[i][j] = (char)0;
+        }
+    }
+
+
+    int curRail = 1;
+    int prevRail = curRail - 1;
+
+    //setting the values of the peakIndex
+    peakIndex[0] = 0; //first peak is always at 0
+    for(int i = 0, curPeak = 1; i < numChars; i++){
+        if(i % (oneCycle - 1) == 0){//peaks are at indexes divisbile by the length of onc Cycle minus 1
+            peakIndex[curPeak] = i;
+            curPeak++;
+        }
+    }
+
+    //setting the values of the middlePeakIndex
+    //first middle peak is at the index of the first peak divided by 2 
+    // (the index where the cipher first returns to the top rail)
+    for(int i = peakIndex[1]/2, j = 0; i < numChars; i += peakIndex[1], j++){
+        middlePeakIndex[j] = i;
+    }
 
     for(int i = 0; i < numChars; i++){
-        for(int j = 6; j > 0; j--){
-
+        charArray[i][curRail] = message[i];
+        if(curRail == a - 1){ //if at bottom
+            curRail--;//next rail is current rail minus 1
         }
+        //else if(curRail ==)
     }
 }
 
