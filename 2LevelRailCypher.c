@@ -13,7 +13,12 @@ int main (void)
     const char* paddedMessage = padMessage2Rail(message,a,b);
 
     printf("%s\n",paddedMessage);
+
+    char testMsg[] = "HOLY_COW_THIS_MESSAGE_IS_EVEN_BETTERNGZAEOG";
+    const char* encryptedMessage = rail2(paddedMessage,6,3);
+    printf("%s\n",encryptedMessage);
     free((char*)paddedMessage);
+    free((char*)encryptedMessage);
 
     return 0;
 }
@@ -51,42 +56,98 @@ const char* rail2(const char* message,int a, int b)
     int oneCycle = 2*a + 2*b - 3; //number of letters in one 'cycle'
     int numCycles = (int)ceil((float)messageLen/oneCycle); //number of complete "W" shapes in the rail
     int numChars = numCycles * oneCycle - numCycles + 1; //this is the number of characters in the padded string
-    int peakIndex[numCycles + 1]; //This array will contain the index numbers for the peaks
-    int middlePeakIndex[numCycles]; //this array will cointain the index numbers of the middle peaks
+//    int peakIndex[numCycles + 1]; //This array will contain the index numbers for the peaks
+//    int middlePeakIndex[numCycles]; //this array will cointain the index numbers of the middle peaks
+//    int basesIndex[2 * numCycles];
+    int encryptedIndexes[messageLen];
 
-    char charArray[numChars][a];
-    for(int i = 0; i < numChars; i++){
-        for(int j = 0; j < a; j++){
-            charArray[i][j] = (char)0;
+
+
+
+//    char charArray[numChars][a];
+//    for(int i = 0; i < numChars; i++){
+//        for(int j = 0; j < a; j++){
+//            charArray[i][j] = (char)0;
+//        }
+//    }
+
+
+
+
+//    //setting the values of the peakIndex
+//    peakIndex[0] = 0; //first peak is always at 0
+//    for(int i = 0, j = 0; i < numCycles; i++, j += oneCycle - 1){
+//        peakIndex[i] = j;
+//    }
+//
+//    //setting the values of the middlePeakIndex
+//    //first middle peak is at the index of the first peak divided by 2 
+//    // (the index where the cipher first returns to the top rail)
+//    for(int i = peakIndex[1]/2, j = 0; i < numChars; i += peakIndex[1], j++){
+//        middlePeakIndex[j] = i;
+//    }
+//
+//    //setting values for basesIndex
+//    for(int i = 0, j = b - 1; i < 2 * numCycles; i += 2, j += oneCycle - 1){
+//        basesIndex[i] = j;
+//        basesIndex[i+1] = j + 2 * b - 2;
+//    }
+    
+
+
+
+    for(int i = 0, curRail = 1, totRail = a, midRail = b; i <= messageLen; i++){
+        
+
+        if(curRail == 1){
+            encryptedIndexes[i] = 1 + (oneCycle - 1) * i;
+            if(i >= numCycles)
+                curRail++;
+        }
+        else if(curRail > 1 && curRail < totRail - midRail + 1){
+            for(int j = 0; j < numCycles; j++,i++){
+                encryptedIndexes[i]   = curRail                                  + (oneCycle - 1) * j;
+                encryptedIndexes[++i] = curRail + (oneCycle - (2 * curRail - 1)) + (oneCycle - 1) * j;
+            }
+            curRail++;
+            i--;
+        }
+        else if(curRail == totRail - midRail + 1){
+            for(int j = 0; j < numCycles; j++,i++){
+                encryptedIndexes[i]   = curRail                               + (oneCycle - 1) * j;
+                encryptedIndexes[++i] = curRail + (totRail - curRail) * 2     + (oneCycle - 1) * j;
+                encryptedIndexes[++i] = curRail + (totRail - curRail) * 2 * 2 + (oneCycle - 1) * j;
+            }
+            curRail++;
+            i--;
+        }
+        else if(curRail < totRail && curRail > totRail - midRail + 1){
+            for(int j = 0; j < numCycles; j++,i++){
+                encryptedIndexes[i]   = curRail                                                                       + (oneCycle - 1) * j;
+                encryptedIndexes[++i] = curRail + (totRail - curRail) * 2                                             + (oneCycle - 1) * j;
+                encryptedIndexes[++i] = curRail + (totRail - curRail) * 2     + (midRail + curRail - totRail - 1) * 2 + (oneCycle - 1) * j;
+                encryptedIndexes[++i] = curRail + (totRail - curRail) * 2 * 2 + (midRail + curRail - totRail - 1) * 2 + (oneCycle - 1) * j;
+            }
+            curRail++;
+            i--;
+        }
+        else if(curRail == totRail){
+            for(int j = 0; j < numCycles; j++,i++){
+                encryptedIndexes[i]   = curRail                                         + (oneCycle - 1) * j;
+                encryptedIndexes[++i] = curRail + (midRail + curRail - totRail - 1) * 2 + (oneCycle - 1) * j;
+            }
+        }
+        else{
+            printf("Something went wrong :(");
         }
     }
-
-
-    int curRail = 1;
-    int prevRail = curRail - 1;
-
-    //setting the values of the peakIndex
-    peakIndex[0] = 0; //first peak is always at 0
-    for(int i = 0, curPeak = 1; i < numChars; i++){
-        if(i % (oneCycle - 1) == 0){//peaks are at indexes divisbile by the length of onc Cycle minus 1
-            peakIndex[curPeak] = i;
-            curPeak++;
-        }
+    
+    
+    char* out = malloc(numChars + 1);
+    for (int i = 0; i <= numChars; i++){
+        out[i] = message[encryptedIndexes[i] - 1];
     }
 
-    //setting the values of the middlePeakIndex
-    //first middle peak is at the index of the first peak divided by 2 
-    // (the index where the cipher first returns to the top rail)
-    for(int i = peakIndex[1]/2, j = 0; i < numChars; i += peakIndex[1], j++){
-        middlePeakIndex[j] = i;
-    }
-
-    for(int i = 0; i < numChars; i++){
-        charArray[i][curRail] = message[i];
-        if(curRail == a - 1){ //if at bottom
-            curRail--;//next rail is current rail minus 1
-        }
-        //else if(curRail ==)
-    }
+    return out;
 }
 
