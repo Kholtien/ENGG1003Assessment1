@@ -5,12 +5,42 @@
 //function prototypes
 const char* padMessage2Rail(const char* message,int a, int b);
 const char* rail2encrypt(const char* message,int a, int b);
+void rail2encryptstart(char* stringToEncrypt, int charLim);
+
 
 int main (void)
 {
     const int charLim = 1000;
+    char string[charLim];
+    rail2encryptstart(string,charLim);
 
+//    printf("Enter a phrase (under %d characters long)\n",charLim);
+//    char input[charLim];
+//    scanf("%[^\n]%*c", input);
+//
+//
+//    printf("Enter The first key in the 2 level rail cipher:\n");
+//    int key1;
+//    scanf("%d", &key1);
+//
+//    
+//    printf("Enter The second key in the 2 level rail cipher:\n");
+//    int key2;
+//    scanf("%d", &key2);
+//
+////    const char* paddedMessage = padMessage2Rail(input,key1,key2);
+//
+////    printf("%s\n",paddedMessage);
+//
+//    char testMsg[] = "HOLY_COW_THIS_MESSAGE_IS_EVEN_BETTERNGZAE";
+//    const char* encryptedMessage = rail2encrypt(input,key1,key2);
+//    printf("%s\n",encryptedMessage);
+//    free((char*)encryptedMessage);
+    printf("%s\n",string);
+    return 0;
+}
 
+void rail2encryptstart(char* stringToEncrypt, int charLim){
     printf("Enter a phrase (under %d characters long)\n",charLim);
     char input[charLim];
     scanf("%[^\n]%*c", input);
@@ -25,16 +55,11 @@ int main (void)
     int key2;
     scanf("%d", &key2);
 
-//    const char* paddedMessage = padMessage2Rail(input,key1,key2);
-
-//    printf("%s\n",paddedMessage);
-
-    char testMsg[] = "HOLY_COW_THIS_MESSAGE_IS_EVEN_BETTERNGZAE";
     const char* encryptedMessage = rail2encrypt(input,key1,key2);
     printf("%s\n",encryptedMessage);
-    free((char*)encryptedMessage);
 
-    return 0;
+    strcpy(stringToEncrypt,encryptedMessage);
+    free((char*)encryptedMessage);
 }
 
 const char* padMessage2Rail(const char* message,int a, int b)
