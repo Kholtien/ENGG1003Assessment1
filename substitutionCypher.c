@@ -1,14 +1,21 @@
 #include <stdio.h>
 #include <string.h>
+
+
 void substitutionCypherEncrypt(char* toEncrypt,char* encrypted, const char* key);
 void substitutionCypherUnencrypt(char* toDencrypt,char* unencrypted, const char* key);
 void stringToUpper(char* str);
 void invertSubstitutionKey(const char* key, char* invertedKey);
 void frequencyAnalysis(const char* encrypted, int* freqAnalysis);
+void frequencyOrder(int* freqAnalysis, char letterAnalysis[][27]);
+
 
 int main()
 {
+
+    //This all is required to get it to work
     char key[] = "VIOGCAPWYSTZJNBRKQFMLDXEHU";
+    char engLetterFreq[] = "ETAOINSHRDLUCMFWYPVBGKJQXZ";
     //            ABCDEFGHIJKLMNOPQRSTUVWXYZ
     char filename[] = "data/paragraph.txt";
     FILE * fp = fopen(filename,"r");
@@ -18,14 +25,27 @@ int main()
     while(fgets(buffer,1000,fp)){
         strcat(toEncrypt,buffer);
     }
+    //below is all stuff related to solving with an unknown 
+
+
+
+
     int freqAnalysis[27];//one for each letter and then a total
+    char letterAnalysis[2][27];
+    for(int i = 0; i < 26; i++){
+        letterAnalysis[0][i] = engLetterFreq[i];
+    }
+    letterAnalysis[0][26] = 0;
+    letterAnalysis[1][26] = 0;
 
 
     substitutionCypherEncrypt(toEncrypt,buffer,key);
     printf("Original:\n%s\n\n\nEncrypted\n%s\n\n\n",toEncrypt,buffer);
 
     frequencyAnalysis(buffer,freqAnalysis);
-    
+
+    frequencyOrder(freqAnalysis,letterAnalysis);
+    frequencyAnalysis(buffer,freqAnalysis);
     substitutionCypherUnencrypt(buffer,toEncrypt,key);
     printf("unencrypted:\n%s",toEncrypt);
 
@@ -92,4 +112,28 @@ void frequencyAnalysis(const char* encrypted, int* freqAnalysis)
     }
 }
 
+
 //https://asecuritysite.com/challenges/scramb?coding=NOPQRSTUVWXYZABCDEFGHIJKLM~this%20is%20a%20message
+
+void frequencyOrder(int* freqAnalysis, char letterAnalysis[][27])
+{
+    int highestFreq = -1;
+    int highestFreqIndex;
+    for(int j = 0; j < 26; j++){
+        for(int i = 0; i < 26; i++){
+            if(freqAnalysis[i] > highestFreq){
+                highestFreqIndex = i;
+                highestFreq = freqAnalysis[i];
+            }
+        }
+        letterAnalysis[1][j] = 65 + highestFreqIndex;
+        freqAnalysis[highestFreqIndex] = -1;
+        highestFreq = -1;
+    }
+    return;
+}
+
+int indexOfRankedFrequency(int* freqAnalysis,int rank)
+{
+    
+}
