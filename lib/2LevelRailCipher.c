@@ -247,3 +247,38 @@ void rail2Decrypt(char* toDecrypt,char* decrypted, int a, int b)
     }
     decrypted[numChars] = 0;
 }
+
+void rail2DecryptTry(char* toDecrypt,char* decrypted, int keyMAX)
+{    
+    char temp[1000];
+    int choiceKey1,choiceKey2;
+    int messageLen = strlen(toDecrypt);
+    int oneCycle;
+    int numCycles;
+    int numChars;
+
+    for(int i = 3; i <= keyMAX; i++){
+        for(int j = 2; j < i; j++){
+
+            oneCycle = 2*i + 2*j - 3; //number of letters in one 'cycle'
+            numCycles = (int)ceil((float)messageLen/oneCycle); //number of complete "W" shapes in the rail
+            numChars = numCycles * oneCycle - numCycles + 1; //this is the number of characters in the padded string
+            if (numChars < messageLen){
+                //the above algorithm for numCycles sometimes is one lower which causes the number of characters to be less than it should be in the 
+                //padded string. This will add another cycle thus increasing the number of characters to the right number. 
+                numCycles++;
+                numChars = numCycles * oneCycle - numCycles + 1;
+            }
+
+            if(numChars == messageLen){
+                rail2Decrypt(toDecrypt, decrypted, i, j);
+                printf("Key 1: %d\t\tKey 2: %d\t\tMessage: %s\n",i,j,decrypted);
+            }
+        }
+    }
+    printf("\n\nWhich key is correct for key 1?: ");
+    scanf("%d",&choiceKey1);
+    printf("\n\nWhich key is correct for key 2?: ");
+    scanf("%d",&choiceKey2);
+    rail2Decrypt(toDecrypt, decrypted, choiceKey1, choiceKey2);
+}

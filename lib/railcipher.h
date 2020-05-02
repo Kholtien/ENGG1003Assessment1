@@ -1,5 +1,5 @@
-#ifndef RAILCYPHER_H_
-#define RAILCYPHER_H_
+#ifndef RAILCIPHER_H_
+#define RAILCIPHER_H_
 
 //#include <stdio.h>
 //#include <string.h>

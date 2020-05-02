@@ -12,6 +12,7 @@
                 "${fileDirname}/project.c",
 				"${fileDirname}/lib/2LevelRailCipher.c",
 				"${fileDirname}/lib/railCipher.c",
+				"${fileDirname}/lib/substitutionCipher.c",
 				"-o",
 				"${fileDirname}/bin/project",
 				"-lm"

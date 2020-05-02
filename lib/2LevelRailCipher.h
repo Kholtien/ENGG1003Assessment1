@@ -21,6 +21,9 @@ void rail2Decrypt(char* toDecrypt,char* decrypted, int a, int b);
 //starts off encryption process
 void rail2encryptstart(char* stringToEncrypt, int charLim);
 
+//tries multiple keys up to key1 == 10
+void rail2DecryptTry(char* toDecrypt,char* decrypted, int keyMAX);
+
 
 #endif //RAILCYPHER_2_H_
 
