@@ -21,7 +21,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "lib/railcipher.h"
-//#include "lib/2LevelRailCipher.h"
+#include "lib/2LevelRailCipher.h"
 int main_menu(void);
 int rail_menu(void);
 int rail2_menu(void);
@@ -52,26 +52,31 @@ int main(int argc, char *argv[])
         railFenceDecryptTry(argv[3],decrypted,10);
         printf("%s\n",decrypted);
     }
-//    else if (strcasecmp(argv[1],"rail2") == 0 && strcasecmp(argv[2],"encrypt") == 0){
-//        int key1 = atoi(argv[4]);
-//        int key2 = atoi(argv[5]);
-//        if (key1 < key2){
-//            int aux = key1;
-//            key1 = key2;
-//            key2 = aux;
-//            printf("Swapped keys as key 1 was less than key 2");
-//        }
-//        if(key2 <= 1){
-//            printf("Error: Second Key must be 2 or greater");
-//            return 1;
-//        }
-//
-//        char encrypted[1000];
-//        rail2encrypt(argv[3],encrypted,key1,key2);
-//        printf("%s\n",encrypted);
-//    }
+    else if (strcasecmp(argv[1],"rail2") == 0 && strcasecmp(argv[2],"encrypt") == 0){
+        int key1 = atoi(argv[4]);
+        int key2 = atoi(argv[5]);
+        char encrypted[1000];
+        char* toEncrypt = argv[3];
+        //strcpy(toEncrypt,argv[3]);
+
+
+        if (key1 < key2){
+            int aux = key1;
+            key1 = key2;
+            key2 = aux;
+            printf("Swapped keys as key 1 (%d) was less than key 2 (%d)\n", key2, key1);
+        }
+        if(key2 <= 1){
+            printf("Error: Second Key must be 2 or greater\n");
+            return 1;
+        }
+
+        printf("Original:  %s\n",toEncrypt);
+        rail2Encrypt(toEncrypt,encrypted,key1,key2);
+        printf("Encrypted: %s\n",encrypted);
+    }
     else{
-        printf("got to the else");
+        printf("Incorrect arguments\n if you need help try 'project help'");
     }
     return 0;
 }

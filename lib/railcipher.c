@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
+#include "railcipher.h"
 
 //
 //void railFenceEncrypt(char* toEncrypt,char* encrypted, int key);

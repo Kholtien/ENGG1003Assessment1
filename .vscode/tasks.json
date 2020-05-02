@@ -5,14 +5,16 @@
     "tasks": [
         {
             "type": "shell",
-            "label": "gcc build active file",
+            "label": "gcc build project file",
             "command": "/usr/bin/gcc",
             "args": [
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}/bin/${fileBasenameNoExtension}",
-                "-lm"
+				"-g",
+                "${fileDirname}/project.c",
+				"${fileDirname}/lib/2LevelRailCipher.c",
+				"${fileDirname}/lib/railCipher.c",
+				"-o",
+				"${fileDirname}/bin/project",
+				"-lm"
             ],
             "options": {
                 "cwd": "/usr/bin"
