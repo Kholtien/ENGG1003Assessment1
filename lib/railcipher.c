@@ -4,6 +4,8 @@
 #include <math.h>
 #include "railcipher.h"
 
+#define MAX_SIZE_FILE_CM 8193 //8 * 1024 + 1
+
 //
 //void railFenceEncrypt(char* toEncrypt,char* encrypted, int key);
 //void padMessageRail(char* message,int key);
@@ -66,6 +68,7 @@ void padMessageRail(char* message,int key)
 
 void railFenceEncrypt(char* toEncrypt,char* encrypted, int key)
 {
+    //used algorithm from http://article.nadiapub.com/IJFGCN/vol11_no2/3.pdf
     padMessageRail(toEncrypt,key);
     int len = strlen(toEncrypt);
     int flg, plainChar;
@@ -128,7 +131,7 @@ void railFenceDecrypt(char* toDecrypt,char* decrypted, int key){
 
 int railFenceDecryptTry(char* toDecrypt,char* decrypted, int keyMAX)
 {
-    char temp[1000];
+    char temp[MAX_SIZE_FILE_CM];
     int choice;
     int messageLen = strlen(toDecrypt);
     int oneCycle;

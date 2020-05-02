@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include <math.h>
 #include "2LevelRailCipher.h"
+
+#define MAX_SIZE_FILE_CM 8193 //8 * 1024 + 1
+
 ////function prototypes
 //const char* padMessage2Rail(const char* message,int a, int b);
 //const char* rail2encrypt(const char* message,int a, int b);
@@ -99,6 +102,7 @@ const char* padMessage2Rail(const char* message,int a, int b)
 }
 void rail2Encrypt(char* toEncrypt,char* encrypted, int a, int b)
 {
+    //influenced by http://article.nadiapub.com/IJFGCN/vol11_no2/3.pdf
     const char* paddedMessage = padMessage2Rail(toEncrypt,a,b);
     int  messageLen = strlen(paddedMessage);
 

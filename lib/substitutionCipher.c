@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include "substitutionCipher.h"
 
+#define MAX_SIZE_FILE_CM 8193 //8 * 1024 + 1
+
 
 //int main()
 //{
