@@ -32,9 +32,9 @@
 ////    int key2;
 ////    scanf("%d", &key2);
 ////
-//////    const char* paddedMessage = padMessage2Rail(input,key1,key2);
+//////    const char* toEncrypt = padMessage2Rail(input,key1,key2);
 ////
-//////    printf("%s\n",paddedMessage);
+//////    printf("%s\n",toEncrypt);
 ////
 ////    char testMsg[] = "HOLY_COW_THIS_MESSAGE_IS_EVEN_BETTERNGZAE";
 ////    const char* encryptedMessage = rail2encrypt(input,key1,key2);
@@ -68,14 +68,14 @@ void rail2encryptstart(char* stringToEncrypt, int charLim){
 
 }
 
-const char* padMessage2Rail(const char* message,int a, int b)
+void padMessage2Rail(char* message,int a, int b)
 {
     int  messageLen = strlen(message);
 
     int oneCycle = 2*a + 2*b - 3; //number of letters in one 'cycle'
     int numCycles = (int)ceil((float)messageLen/oneCycle); //number of complete "W" shapes in the rail
     int numChars = numCycles * oneCycle - numCycles + 1; //this is the number of characters in the padded string
-    if (numChars < messageLen){
+    while (numChars < messageLen){
         //the above algorithm for numCycles sometimes is one lower which causes the number of characters to be less than it should be in the 
         //padded string. This will add another cycle thus increasing the number of characters to the right number. 
         numCycles++;
@@ -85,31 +85,28 @@ const char* padMessage2Rail(const char* message,int a, int b)
 
     
     //fill in messWithExtraChar with message and extra characters if required then the null character at the end
-    for (int i = 0; i < numChars; i++) {
-        if(i < messageLen)
-            messWithExtraChar[i] = message[i];
-        else 
-            messWithExtraChar[i] = (char)(65 + rand() % 26);
+    for (int i = messageLen; i < numChars; i++) {
+        message[i] = (char)(65 + rand() % 26);
     }
-    messWithExtraChar[numChars] = (char)0;
+    message[numChars] = (char)0;
 
-    char* out = malloc(numChars + 1);
-    for (int i = 0; i <= numChars; i++){
-        out[i] = messWithExtraChar[i];
-    }
-
-    return out;
+//    char* out = malloc(numChars + 1);
+//    for (int i = 0; i <= numChars; i++){
+//        out[i] = messWithExtraChar[i];
+//    }
+//
+//    return out;
 }
 void rail2Encrypt(char* toEncrypt,char* encrypted, int a, int b)
 {
     //influenced by http://article.nadiapub.com/IJFGCN/vol11_no2/3.pdf
-    const char* paddedMessage = padMessage2Rail(toEncrypt,a,b);
-    int  messageLen = strlen(paddedMessage);
+    padMessage2Rail(toEncrypt,a,b);
+    int  messageLen = strlen(toEncrypt);
 
     int oneCycle = 2*a + 2*b - 3; //number of letters in one 'cycle'
     int numCycles = (int)ceil((float)messageLen/oneCycle); //number of complete "W" shapes in the rail
     int numChars = numCycles * oneCycle - numCycles + 1; //this is the number of characters in the padded string
-    if (numChars < messageLen){
+    while (numChars < messageLen){
         //the above algorithm for numCycles sometimes is one lower which causes the number of characters to be less than it should be in the 
         //padded string. This will add another cycle thus increasing the number of characters to the right number. 
         numCycles++;
@@ -156,10 +153,12 @@ void rail2Encrypt(char* toEncrypt,char* encrypted, int a, int b)
             i--;
         }
         else if(curRail == totRail){
-            for(int j = 0; j < numCycles; j++,i++){
+            int j;
+            for(j = 0; j < numCycles; j++,i++){
                 encryptedIndexes[i]   = curRail                                         + (oneCycle - 1) * j;
                 encryptedIndexes[++i] = curRail + (midRail + curRail - totRail - 1) * 2 + (oneCycle - 1) * j;
             }
+            //curRail++;
         }
         else{
             printf("Something went wrong :(");
@@ -168,13 +167,13 @@ void rail2Encrypt(char* toEncrypt,char* encrypted, int a, int b)
     
 
     for (int i = 0; i < numChars; i++){
-        encrypted[i] = paddedMessage[encryptedIndexes[i] -1];
+        encrypted[i] = toEncrypt[encryptedIndexes[i] -1];
     }
     encrypted[numChars] = 0;
-    //free(paddedMessage);
+    //free(toEncrypt);
     //char* out = malloc(numChars + 1);
     //for (int i = 0; i < numChars; i++){
-    //    out[i] = paddedMessage[encryptedIndexes[i] - 1];
+    //    out[i] = toEncrypt[encryptedIndexes[i] - 1];
     //}
     //out[numChars] = 0;
 //
@@ -188,7 +187,7 @@ void rail2Decrypt(char* toDecrypt,char* decrypted, int a, int b)
     int oneCycle = 2*a + 2*b - 3; //number of letters in one 'cycle'
     int numCycles = (int)ceil((float)messageLen/oneCycle); //number of complete "W" shapes in the rail
     int numChars = numCycles * oneCycle - numCycles + 1; //this is the number of characters in the padded string
-    if (numChars < messageLen){
+    while (numChars < messageLen){
         //the above algorithm for numCycles sometimes is one lower which causes the number of characters to be less than it should be in the 
         //padded string. This will add another cycle thus increasing the number of characters to the right number. 
         numCycles++;
@@ -267,7 +266,7 @@ void rail2DecryptTry(char* toDecrypt,char* decrypted, int keyMAX)
             oneCycle = 2*i + 2*j - 3; //number of letters in one 'cycle'
             numCycles = (int)ceil((float)messageLen/oneCycle); //number of complete "W" shapes in the rail
             numChars = numCycles * oneCycle - numCycles + 1; //this is the number of characters in the padded string
-            if (numChars < messageLen){
+            while (numChars < messageLen){
                 //the above algorithm for numCycles sometimes is one lower which causes the number of characters to be less than it should be in the 
                 //padded string. This will add another cycle thus increasing the number of characters to the right number. 
                 numCycles++;
@@ -276,7 +275,7 @@ void rail2DecryptTry(char* toDecrypt,char* decrypted, int keyMAX)
 
             if(numChars == messageLen){
                 rail2Decrypt(toDecrypt, decrypted, i, j);
-                printf("Key 1: %d\t\tKey 2: %d\t\tMessage: %s\n",i,j,decrypted);
+                printf("Key 1: %d\t\tKey 2: %d\t\tMessage:\n\n%s\n\n\n",i,j,decrypted);
             }
         }
     }

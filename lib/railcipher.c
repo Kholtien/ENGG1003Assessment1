@@ -52,7 +52,7 @@ void padMessageRail(char* message,int key)
     int oneCycle = 2 * key - 2; //number of letters in one 'cycle'
     int numCycles = ceil(messageLen/oneCycle); //number of complete "W" shapes in the rail
     int numChars = numCycles * oneCycle + 1; //this is the number of characters in the padded string
-    if (numChars < messageLen){
+    while (numChars < messageLen){
         //the above algorithm for numCycles sometimes is one lower which causes the number of characters to be less than it should be in the 
         //padded string. This will add another cycle thus increasing the number of characters to the right number. 
         numCycles++;
@@ -145,7 +145,7 @@ int railFenceDecryptTry(char* toDecrypt,char* decrypted, int keyMAX)
         oneCycle = 2 * i - 2; //number of letters in one 'cycle'
         numCycles = ceil(messageLen/oneCycle); //number of complete "W" shapes in the rail
         numChars = numCycles * oneCycle + 1; //this is the number of characters in the padded string
-        if (numChars < messageLen){
+        while (numChars < messageLen){
             //the above algorithm for numCycles sometimes is one lower which causes the number of characters to be less than it should be in the 
             //padded string. This will add another cycle thus increasing the number of characters to the right number. 
             numCycles++;

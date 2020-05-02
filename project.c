@@ -43,14 +43,22 @@ int main(int argc, char *argv[])
         printf("bin/project rail encrypt 'This is such a great message. Truly Tremendous.' 4\n");
         printf("bin/project rail decrypt 'Ts asTTdWhi haetsa r rnoNi sc r eg.uyeeu.sugmelms' 4\n");
         printf("bin/project rail decrypt 'Ts asTTdWhi haetsa r rnoNi sc r eg.uyeeu.sugmelms' try\n");
-        printf("bin/project rail2 encrypt 'This is such a great message. Truly Tremendous.'7 4\n");
+        printf("bin/project rail2 encrypt 'This is such a great message. Truly Tremendous.' 7 4\n");
         printf("bin/project rail2 decrypt 'TaTQhet rMir yeBsugmelmsB sc eg.ueu.Ri hasa rnoNLs sTdW' 7 4\n");
         printf("bin/project rail2 decrypt 'TaTQhet rMir yeBsugmelmsB sc eg.ueu.Ri hasa rnoNLs sTdW' try\n");
         printf("bin/project sub encrypt 'This is such a great message. Truly Tremendous.' GHIDXZLMBNOPFQERSTCUVWAKYJ\n");
-        printf("bin/project sub encrypt 'UMBC BC CVIM G LTXGU FXCCGLX. UTVPY UTXFXQDEVC.' GHIDXZLMBNOPFQERSTCUVWAKYJ\n");
-        printf("bin/project sub encrypt 'UMBC BC CVIM G LTXGU FXCCGLX. UTVPY UTXFXQDEVC.' try *****\n");
+        printf("bin/project sub decrypt 'UMBC BC CVIM G LTXGU FXCCGLX. UTVPY UTXFXQDEVC.' GHIDXZLMBNOPFQERSTCUVWAKYJ\n");
+        printf("bin/project sub decrypt 'UMBC BC CVIM G LTXGU FXCCGLX. UTVPY UTXFXQDEVC.' try *****\n");
         printf("\nYou can also replace the message with a filepath and add an additional argument 'file'\n\n");
-        printf("bin/project rail encrypt data/alchemist.txt 4 file\n");
+        printf("bin/project rail encrypt data/alchemist.txt 6 file\n");
+        printf("bin/project rail decrypt data/alchemistEncryptedRail6.txt 4 file\n");
+        printf("bin/project rail decrypt data/alchemistEncryptedRail6.txt try file\n");
+        printf("bin/project rail2 encrypt data/alchemist.txt 7 4 file\n");
+        printf("bin/project rail2 decrypt data/alchemistRail2Encrypt74.txt 7 4 file\n");
+        printf("bin/project rail2 decrypt data/alchemistRail2Encrypt74.txt try file\n");
+        printf("bin/project sub encrypt data/alchemist.txt GHIDXZLMBNOPFQERSTCUVWAKYJ file\n");
+        printf("bin/project sub decrypt data/alchemistSubEncrypted.txt GHIDXZLMBNOPFQERSTCUVWAKYJ file\n");
+        printf("bin/project sub decrypt data/alchemistSubEncrypted.txt try file *****\n");
         printf("\n\t\t*****\t this feature isn't yet implemented\n");
 
     }
@@ -60,26 +68,26 @@ int main(int argc, char *argv[])
     #################################################################################################################################   
     */
     else if (argc == 5 && strcasecmp(argv[1],"rail") == 0 && strcasecmp(argv[2],"encrypt") == 0){
-        char encrypted[1000];
+        char encrypted[MAX_SIZE_FILE_CM];
         railFenceEncrypt(argv[3],encrypted,atoi(argv[4]));
         printf("%s\n",encrypted);
     }
     else if (argc == 5 && strcasecmp(argv[1],"rail") == 0 && strcasecmp(argv[2],"decrypt") == 0 && strcasecmp(argv[4],"try") != 0){
-        char decrypted[1000];
+        char decrypted[MAX_SIZE_FILE_CM];
         railFenceDecrypt(argv[3],decrypted,atoi(argv[4]));
         printf("%s\n",decrypted);
     }
     else if (argc == 5 && strcasecmp(argv[1],"rail") == 0 && strcasecmp(argv[2],"decrypt") == 0 && strcasecmp(argv[4],"try") == 0){
         const int railMAX = 10;
         printf("Attempting to decrypt the below with rail keys 2 through %d\n\n%s",railMAX,argv[3]);
-        char decrypted[1000];
+        char decrypted[MAX_SIZE_FILE_CM];
         railFenceDecryptTry(argv[3],decrypted,railMAX);
         printf("%s\n",decrypted);
     }
     else if (argc == 6 && strcasecmp(argv[1],"rail2") == 0 && strcasecmp(argv[2],"encrypt") == 0){
         int key1 = atoi(argv[4]);
         int key2 = atoi(argv[5]);
-        char encrypted[1000];
+        char encrypted[MAX_SIZE_FILE_CM];
         char* toEncrypt = argv[3];
         //strcpy(toEncrypt,argv[3]);
 
@@ -99,10 +107,10 @@ int main(int argc, char *argv[])
         rail2Encrypt(toEncrypt,encrypted,key1,key2);
         printf("Encrypted: %s\n",encrypted);
     }
-    else if (argc == 6 && strcasecmp(argv[1],"rail2") == 0 && strcasecmp(argv[2],"decrypt") == 0){
+    else if (argc == 6 && strcasecmp(argv[1],"rail2") == 0 && strcasecmp(argv[2],"decrypt") == 0 && strcasecmp(argv[4],"try") != 0){
         int key1 = atoi(argv[4]);
         int key2 = atoi(argv[5]);
-        char decrypted[1000];
+        char decrypted[MAX_SIZE_FILE_CM];
         char* toDecrypt = argv[3];
         //strcpy(toEncrypt,argv[3]);
 
@@ -124,7 +132,7 @@ int main(int argc, char *argv[])
     }
     else if (argc == 5 && strcasecmp(argv[1],"rail2") == 0 && strcasecmp(argv[2],"decrypt") == 0 && strcasecmp(argv[4],"try") == 0){
         int keyMAX = 10;
-        char decrypted[1000];
+        char decrypted[MAX_SIZE_FILE_CM];
         char* toDecrypt = argv[3];
         //strcpy(toEncrypt,argv[3]);
 
@@ -136,7 +144,7 @@ int main(int argc, char *argv[])
     else if (argc == 5 && strcasecmp(argv[1],"sub") == 0 && strcasecmp(argv[2],"encrypt") == 0 && strlen(argv[4]) == 26){
         char* toEncrypt = argv[3];
         char* key = argv[4];
-        char encrypted[8 * 1024 + 1];
+        char encrypted[MAX_SIZE_FILE_CM];
 
         printf("Original:  %s\n\n",toEncrypt);
         substitutionCipherEncrypt(toEncrypt, encrypted, key);
@@ -146,7 +154,7 @@ int main(int argc, char *argv[])
     else if (argc == 5 && strcasecmp(argv[1],"sub") == 0 && strcasecmp(argv[2],"decrypt") == 0 && strlen(argv[4]) == 26){
         char* toDecrypt = argv[3];
         char* key = argv[4];
-        char decrypted[8 * 1024 + 1];
+        char decrypted[MAX_SIZE_FILE_CM];
 
         printf("Original:  %s\n\n",toDecrypt);
         substitutionCipherDecrypt(toDecrypt, decrypted, key);
@@ -241,11 +249,28 @@ int main(int argc, char *argv[])
         stringToFileQuestion(decrypted);
     }
     else if (argc == 7 && strcasecmp(argv[1],"rail2") == 0 && strcasecmp(argv[2],"encrypt") == 0 && strcasecmp(argv[6],"file") == 0){
+        char* filePath = argv[3];
+        FILE * fileToEncrypt;
+        char toEncrypt[MAX_SIZE_FILE_CM];
+        char encrypted[MAX_SIZE_FILE_CM];
+        int charCount = 0;
+
         int key1 = atoi(argv[4]);
         int key2 = atoi(argv[5]);
-        char encrypted[MAX_SIZE_FILE_CM];
-        char* toEncrypt = argv[3];
-        //strcpy(toEncrypt,argv[3]);
+
+        //Opening File
+        fileToEncrypt = fopen(filePath,"r");
+        if (fileToEncrypt == NULL){ 
+            printf("Could not open file %s", filePath); 
+            return 1; 
+        } 
+
+        //transcribing file to string.
+        for(char c = fgetc(fileToEncrypt); c != EOF && charCount != MAX_SIZE_FILE_CM; c = fgetc(fileToEncrypt),charCount++){
+            toEncrypt[charCount] = c;
+        }
+        toEncrypt[charCount] = 0;
+
 
 
         if (key1 < key2){
@@ -263,14 +288,32 @@ int main(int argc, char *argv[])
         rail2Encrypt(toEncrypt,encrypted,key1,key2);
         printf("Encrypted: %s\n",encrypted);
 
+        stringToFileQuestion(encrypted);
+
 
     }
-    else if (argc == 6 && strcasecmp(argv[1],"rail2") == 0 && strcasecmp(argv[2],"decrypt") == 0){
+    else if (argc == 7 && strcasecmp(argv[1],"rail2") == 0 && strcasecmp(argv[2],"decrypt") == 0 && strcasecmp(argv[6],"file") == 0 && strcasecmp(argv[4],"try") != 0){
         int key1 = atoi(argv[4]);
         int key2 = atoi(argv[5]);
+
+        char* filePath = argv[3];
+        FILE * fileToDecrypt;
+        char toDecrypt[MAX_SIZE_FILE_CM];
         char decrypted[MAX_SIZE_FILE_CM];
-        char* toDecrypt = argv[3];
-        //strcpy(toEncrypt,argv[3]);
+        int charCount = 0;
+
+        fileToDecrypt = fopen(filePath,"r");
+        if (fileToDecrypt == NULL) 
+        { 
+            printf("Could not open file %s", filePath); 
+            return 1; 
+        } 
+
+        for(char c = fgetc(fileToDecrypt); c != EOF && charCount != MAX_SIZE_FILE_CM; c = fgetc(fileToDecrypt),charCount++){
+            toDecrypt[charCount] = c;
+        }
+        toDecrypt[charCount] = 0;
+
 
 
         if (key1 < key2){
@@ -284,40 +327,93 @@ int main(int argc, char *argv[])
             return 1;
         }
 
-        printf("Original:  %s\n",toDecrypt);
+        printf("Original:\n\n %s\n\n",toDecrypt);
         rail2Decrypt(toDecrypt,decrypted,key1,key2);
-        printf("Decrypted: %s\n",decrypted);
+        printf("Decrypted:\n\n%s\n\n",decrypted);
+
+        stringToFileQuestion(decrypted);
     }
-    else if (argc == 5 && strcasecmp(argv[1],"rail2") == 0 && strcasecmp(argv[2],"decrypt") == 0 && strcasecmp(argv[4],"try") == 0){
+    else if (argc == 6 && strcasecmp(argv[1],"rail2") == 0 && strcasecmp(argv[2],"decrypt") == 0 && strcasecmp(argv[4],"try") == 0 && strcasecmp(argv[5],"file") == 0){
         int keyMAX = 10;
+        char* filePath = argv[3];
+        FILE * fileToDecrypt;
+        char toDecrypt[MAX_SIZE_FILE_CM];
         char decrypted[MAX_SIZE_FILE_CM];
-        char* toDecrypt = argv[3];
-        //strcpy(toEncrypt,argv[3]);
+        int charCount = 0;
+
+        fileToDecrypt = fopen(filePath,"r");
+        if (fileToDecrypt == NULL) 
+        { 
+            printf("Could not open file %s", filePath); 
+            return 1; 
+        } 
+
+        for(char c = fgetc(fileToDecrypt); c != EOF && charCount != MAX_SIZE_FILE_CM; c = fgetc(fileToDecrypt),charCount++){
+            toDecrypt[charCount] = c;
+        }
+        toDecrypt[charCount] = 0;
 
 
         //printf("Original:  %s\n",toDecrypt);
         rail2DecryptTry(toDecrypt,decrypted,keyMAX);
         printf("Decrypted: %s\n",decrypted);
-    }
-    else if (argc == 5 && strcasecmp(argv[1],"sub") == 0 && strcasecmp(argv[2],"encrypt") == 0 && strlen(argv[4]) == 26){
-        char* toEncrypt = argv[3];
-        char* key = argv[4];
-        char encrypted[8 * 1024 + 1];
 
-        printf("Original:  %s\n\n",toEncrypt);
+        stringToFileQuestion(decrypted);
+    }
+    else if (argc == 6 && strcasecmp(argv[1],"sub") == 0 && strcasecmp(argv[2],"encrypt") == 0 && strlen(argv[4]) == 26 && strcasecmp(argv[5],"file") == 0){
+        char * filePath = argv[3];
+        FILE * filetoEncrypt;
+        char toEncrypt[MAX_SIZE_FILE_CM];
+        char encrypted[MAX_SIZE_FILE_CM];
+        int charCount = 0;
+        char * key = argv[4];
+
+        //Opening File
+        filetoEncrypt = fopen(filePath,"r");
+        if (filetoEncrypt == NULL){ 
+            printf("Could not open file %s", filePath); 
+            return 1; 
+        } 
+
+        //transcribing file to string.
+        for(char c = fgetc(filetoEncrypt); c != EOF && charCount != MAX_SIZE_FILE_CM; c = fgetc(filetoEncrypt),charCount++){
+            toEncrypt[charCount] = c;
+        }
+        toEncrypt[charCount] = 0;
+
+        printf("Original:\n\n%s\n\n",toEncrypt);
         substitutionCipherEncrypt(toEncrypt, encrypted, key);
-        printf("Encrypted: %s\n\n",encrypted);
+        printf("Encrypted:\n\n%s\n\n",encrypted);
 
+
+        stringToFileQuestion(encrypted);
     }
-    else if (argc == 5 && strcasecmp(argv[1],"sub") == 0 && strcasecmp(argv[2],"decrypt") == 0 && strlen(argv[4]) == 26){
-        char* toDecrypt = argv[3];
-        char* key = argv[4];
-        char decrypted[8 * 1024 + 1];
+    else if (argc == 6 && strcasecmp(argv[1],"sub") == 0 && strcasecmp(argv[2],"decrypt") == 0 && strlen(argv[4]) == 26 && strcasecmp(argv[5],"file") == 0){
+        char * filePath = argv[3];
+        FILE * filetoDecrypt;
+        char toDecrypt[MAX_SIZE_FILE_CM];
+        char decrypted[MAX_SIZE_FILE_CM];
+        int charCount = 0;
+        char * key = argv[4];
+
+        //Opening File
+        filetoDecrypt = fopen(filePath,"r");
+        if (filetoDecrypt == NULL){ 
+            printf("Could not open file %s", filePath); 
+            return 1; 
+        } 
+
+        //transcribing file to string.
+        for(char c = fgetc(filetoDecrypt); c != EOF && charCount != MAX_SIZE_FILE_CM; c = fgetc(filetoDecrypt),charCount++){
+            toDecrypt[charCount] = c;
+        }
+        toDecrypt[charCount] = 0;
 
         printf("Original:  %s\n\n",toDecrypt);
         substitutionCipherDecrypt(toDecrypt, decrypted, key);
         printf("Encrypted: %s\n\n",decrypted);
 
+        stringToFileQuestion(decrypted);
     }
     else{
         printf("Incorrect arguments\n if you need help try 'project help'\n");

@@ -9,7 +9,7 @@
 //function prototypes
 
 //Pads message to fit full length of zig zag
-const char* padMessage2Rail(const char* message,int a, int b);
+void padMessage2Rail(char* message,int a, int b);
 
 //Ecnrypts the message. Returns encrypted string. 
 //const char* rail2encrypt(const char* message,int a, int b);

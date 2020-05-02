@@ -9,12 +9,12 @@
             "command": "/usr/bin/gcc",
             "args": [
 				"-g",
-                "${fileDirname}/project.c",
-				"${fileDirname}/lib/2LevelRailCipher.c",
-				"${fileDirname}/lib/railCipher.c",
-				"${fileDirname}/lib/substitutionCipher.c",
+                "${workspaceFolder}/project.c",
+				"${workspaceFolder}/lib/2LevelRailCipher.c",
+				"${workspaceFolder}/lib/railCipher.c",
+				"${workspaceFolder}/lib/substitutionCipher.c",
 				"-o",
-				"${fileDirname}/bin/project",
+				"${workspaceFolder}/bin/project",
 				"-lm"
             ],
             "options": {

@@ -5,6 +5,111 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "gcc build and debug Project File sub decrypt file",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/bin/project",
+            "args": ["sub","decrypt","data/alchemistSubEncrypted.txt","GHIDXZLMBNOPFQERSTCUVWAKYJ","file"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "gcc build project file",
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "gcc build and debug Project File sub encrypt file",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/bin/project",
+            "args": ["sub","encrypt","data/alchemist.txt","GHIDXZLMBNOPFQERSTCUVWAKYJ","file"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "gcc build project file",
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "gcc build and debug Project File Rail2 decryption try",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/bin/project",
+            "args": ["rail2","decrypt","data/alchemistRail2Encrypt74.txt","try","file"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "gcc build project file",
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "gcc build and debug Project File Rail2 decryption",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/bin/project",
+            "args": ["rail2","decrypt","data/alchemistRail2Encrypt74.txt","7","4","file"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "gcc build project file",
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "gcc build and debug Project File Rail2 encryption",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/bin/project",
+            "args": ["rail2","encrypt","data/alchemist.txt","7","4","file"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "gcc build project file",
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
             "name": "gcc build and debug Project File Rail Decryption",
             "type": "cppdbg",
             "request": "launch",
