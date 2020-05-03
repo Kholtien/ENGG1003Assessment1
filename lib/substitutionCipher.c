@@ -5,50 +5,12 @@
 
 #define MAX_SIZE_FILE_CM 8193 //8 * 1024 + 1
 
+struct WordCount
+{
+    char word[30];
+    int count;
+};
 
-//int main()
-//{
-//
-//    //This all is required to get it to work
-//    char key[] = "VIOGCAPWYSTZJNBRKQFMLDXEHU";
-//    char engLetterFreq[] = "ETAOINSHRDLUCMFWYPVBGKJQXZ";
-//    //            ABCDEFGHIJKLMNOPQRSTUVWXYZ
-//    char filename[] = "data/paragraph.txt";
-//    FILE * fp = fopen(filename,"r");
-//
-//    char toEncrypt[8 * 1024 + 1];
-//    char buffer[8 * 1024 + 1];
-//    while(fgets(buffer,1000,fp)){
-//        strcat(toEncrypt,buffer);
-//    }
-//    //below is all stuff related to solving with an unknown 
-//
-//
-//
-//
-//    int freqAnalysis[27];//one for each letter and then a total
-//    char letterAnalysis[2][27];
-//    for(int i = 0; i < 26; i++){
-//        letterAnalysis[0][i] = engLetterFreq[i];
-//    }
-//    letterAnalysis[0][26] = 0;
-//    letterAnalysis[1][26] = 0;
-//
-//
-//    substitutionCypherEncrypt(toEncrypt,buffer,key);
-//    printf("Original:\n%s\n\n\nEncrypted\n%s\n\n\n",toEncrypt,buffer);
-//
-//    frequencyAnalysis(buffer,freqAnalysis);
-//
-//    frequencyOrder(freqAnalysis,letterAnalysis);
-//    frequencyAnalysis(buffer,freqAnalysis);
-//    substitutionCypherUnencrypt(buffer,toEncrypt,key);
-//    printf("unencrypted:\n%s",toEncrypt);
-//
-//
-//
-//    return 0;
-//}
 
 void substitutionCipherEncrypt(char* toEncrypt,char* encrypted, const char* key)
 {
@@ -75,6 +37,7 @@ void stringToUpper(char* str)
 
 void substitutionCipherDecrypt(char* toDecrypt,char* decrypted, const char* key)
 {
+    stringToUpper(toDecrypt);
     char invertedKey[27];
     invertSubstitutionKey(key,invertedKey);
     for(int i = 0; i < strlen(toDecrypt); i++){
@@ -94,10 +57,10 @@ void invertSubstitutionKey(const char* key, char* invertedKey)
     }
 }
 
-void frequencyAnalysis(const char* encrypted, int* freqAnalysis)
+void frequencyAnalysis(const char* encrypted, int freqAnalysis[27])
 {
     int totLetters = 0;
-    for(int i = 0; i < 26; i++){
+    for(int i = 0; i <= 26; i++){
         freqAnalysis[i] = 0;
     }
     for(int i = 0; i < strlen(encrypted); i++){
@@ -133,3 +96,80 @@ void frequencyOrder(int* freqAnalysis, char letterAnalysis[][27])
 //{
 //    
 //}
+
+void subCipherDecryptTry(char* toDecrypt,char* decrypted, char* key)
+{
+    int messageLen = strlen(toDecrypt);
+    char toDecryptCopy[messageLen];
+    int MAX_NUMBER_OF_WORDS = 10000;
+    stringToUpper(toDecrypt);
+    strcpy(toDecryptCopy,toDecrypt);
+    int letterFreq[27];
+    char keyGuess [26][2];
+    char oneLetterWords [MAX_NUMBER_OF_WORDS][2];
+    char twoLetterWords [MAX_NUMBER_OF_WORDS][3];
+    char threeLetterWords [MAX_NUMBER_OF_WORDS][4];
+    char * pch;
+
+    //Zero's out letter frequency as well as putting the letters of the alphabet into keyGuess[][0]
+    for (int i = 0, j = 'A'; i <= 26; i++,j++){
+        letterFreq[i] = 0;
+        keyGuess[i][0] = j;
+    }
+    frequencyAnalysis(toDecrypt, letterFreq);
+    char engLetterFreq[] = "ETAOINSRHDLUCMFYWGPBVKXQJZ";
+    //                      ABCDEFGHIJKLMNOPQRSTUVWXYZ
+    //                      GHIDXZLMBNOPFQERSTCUVWAKYJ
+
+    //get count of one letter words
+    
+    int i1 = 0, i2 = 0,i3 = 0;
+    
+    struct WordCount oneCount[MAX_NUMBER_OF_WORDS];
+    struct WordCount twoCount[MAX_NUMBER_OF_WORDS];
+    struct WordCount threeCount[MAX_NUMBER_OF_WORDS];
+
+    for(pch = strtok(toDecryptCopy," ,.()\n"); pch != NULL; pch = strtok(NULL," ,.()\n")){
+        if(strlen(pch) == 1){
+            strcpy(oneLetterWords[i1],pch);
+            i1++;
+            for()
+        }
+        else if(strlen(pch) == 2){
+            strcpy(twoLetterWords[i2],pch);
+            i2++;
+        }
+        else if(strlen(pch) == 3){
+            strcpy(threeLetterWords[i3],pch);
+            i3++;
+        }
+    }
+
+
+
+    //Puts the most frequently used letters in the encrypted text and normalizes it against engLetterFreq.
+    for(int i = 0; i < 26; i++){
+        int maxVAL[2] = {0,0};
+        for(int j = 0; j < 26; j++){
+            if(letterFreq[j] > maxVAL[0]){
+                maxVAL[0] = letterFreq[j];
+                maxVAL[1] = j;
+            }
+        }
+        keyGuess[engLetterFreq[i] - 65][1] = maxVAL[1] + 65;
+        letterFreq[maxVAL[1]] = -1;
+    }
+
+    //copies keyGuess into key. Probably could've just use strcpy... 
+    for(int i = 0; i < 26; i++){
+        key[i] = keyGuess[i][1];
+    }
+
+    substitutionCipherDecrypt(toDecrypt,decrypted,key);
+
+    printf("Using the key %s\n\nIs this close?\n\n\n%s\n\n",key,decrypted);
+}
+//abcdefghijklmnopqrstuvwxyz
+//QAXBSWKGYFHMEDCOPUZJRINATA
+//QAXBSWOUYAHMEDCIPGZJRKTFNA
+//qazxswedcvfrtgbnhyujmkilop

@@ -5,11 +5,32 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "gcc build and debug Project File sub decrypt file try",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/bin/project",
+            "args": ["sub","decrypt","data/cypher.txt","file","try"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "gcc build project file",
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
             "name": "gcc build and debug Project File sub decrypt file",
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}/bin/project",
-            "args": ["sub","decrypt","data/alchemistSubEncrypted.txt","GHIDXZLMBNOPFQERSTCUVWAKYJ","file"],
+            "args": ["sub","decrypt","data/cypher.txt","QAZXSWEDCVFRTGBNHYUJMKILOP","file"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
