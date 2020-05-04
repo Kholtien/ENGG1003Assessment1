@@ -5,14 +5,33 @@
     "tasks": [
         {
             "type": "shell",
+            "label": "gcc build final file",
+            "command": "/usr/bin/gcc",
+            "args": [
+				"-g",
+                "${workspaceFolder}/c3267533.c",
+				"-o",
+				"${workspaceFolder}/c3267533.out",
+				"-lm"
+            ],
+            "options": {
+                "cwd": "/usr/bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build"
+        },
+        {
+            "type": "shell",
             "label": "gcc build project file",
             "command": "/usr/bin/gcc",
             "args": [
 				"-g",
-                "${workspaceFolder}/project.c",
-				"${workspaceFolder}/lib/2LevelRailCipher.c",
-				"${workspaceFolder}/lib/railCipher.c",
-				"${workspaceFolder}/lib/substitutionCipher.c",
+                "${workspaceFolder}/src/project.c",
+				"${workspaceFolder}/src/2LevelRailCipher.c",
+				"${workspaceFolder}/src/railCipher.c",
+				"${workspaceFolder}/src/substitutionCipher.c",
 				"-o",
 				"${workspaceFolder}/bin/project",
 				"-lm"

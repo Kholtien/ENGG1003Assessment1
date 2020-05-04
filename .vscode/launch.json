@@ -5,11 +5,11 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "gcc build and debug Project File sub decrypt file try",
+            "name": "gcc build and debug Project File rail decrypt 6",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/bin/project",
-            "args": ["sub","decrypt","data/cypher.txt","file","try"],
+            "program": "${fileDirname}/c3267533.out",
+            "args": ["rail","decrypt","Ts asTTdWhi haetsa r rnoNi sc r eg.uyeeu.sugmelms","4"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
@@ -22,14 +22,35 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "gcc build project file",
+            "preLaunchTask": "gcc build final file",
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "gcc build and debug Project File sub decrypt file try",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/c3267533.out",
+            "args": ["sub","decrypt","data/cypher.txt","try","file"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "gcc build final file",
             "miDebuggerPath": "/usr/bin/gdb"
         },
         {
             "name": "gcc build and debug Project File sub decrypt file",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/bin/project",
+            "program": "${fileDirname}/c3267533.out",
             "args": ["sub","decrypt","data/cypher.txt","QAZXSWEDCVFRTGBNHYUJMKILOP","file"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -43,14 +64,14 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "gcc build project file",
+            "preLaunchTask": "gcc build final file",
             "miDebuggerPath": "/usr/bin/gdb"
         },
         {
             "name": "gcc build and debug Project File sub encrypt file",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/bin/project",
+            "program": "${fileDirname}/c3267533.out",
             "args": ["sub","encrypt","data/alchemist.txt","GHIDXZLMBNOPFQERSTCUVWAKYJ","file"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -64,14 +85,14 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "gcc build project file",
+            "preLaunchTask": "gcc build final file",
             "miDebuggerPath": "/usr/bin/gdb"
         },
         {
             "name": "gcc build and debug Project File Rail2 decryption try",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/bin/project",
+            "program": "${fileDirname}/c3267533.out",
             "args": ["rail2","decrypt","data/alchemistRail2Encrypt74.txt","try","file"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -85,14 +106,14 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "gcc build project file",
+            "preLaunchTask": "gcc build final file",
             "miDebuggerPath": "/usr/bin/gdb"
         },
         {
             "name": "gcc build and debug Project File Rail2 decryption",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/bin/project",
+            "program": "${fileDirname}/c3267533.out",
             "args": ["rail2","decrypt","data/alchemistRail2Encrypt74.txt","7","4","file"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -106,14 +127,14 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "gcc build project file",
+            "preLaunchTask": "gcc build final file",
             "miDebuggerPath": "/usr/bin/gdb"
         },
         {
             "name": "gcc build and debug Project File Rail2 encryption",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/bin/project",
+            "program": "${fileDirname}/c3267533.out",
             "args": ["rail2","encrypt","data/alchemist.txt","7","4","file"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -127,14 +148,14 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "gcc build project file",
+            "preLaunchTask": "gcc build final file",
             "miDebuggerPath": "/usr/bin/gdb"
         },
         {
             "name": "gcc build and debug Project File Rail Decryption",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/bin/project",
+            "program": "${fileDirname}/c3267533.out",
             "args": ["rail","decrypt","data/alchemistEncryptedRail6.txt","try","file"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -148,14 +169,14 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "gcc build project file",
+            "preLaunchTask": "gcc build final file",
             "miDebuggerPath": "/usr/bin/gdb"
         },
         {
             "name": "gcc build and debug Project File Rail Encryption",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/bin/project",
+            "program": "${fileDirname}/c3267533.out",
             "args": ["rail","encrypt","data/alchemist.txt","6","file"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -169,14 +190,14 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "gcc build project file",
+            "preLaunchTask": "gcc build final file",
             "miDebuggerPath": "/usr/bin/gdb"
         },
         {
             "name": "gcc build and debug Project substitution decryption",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/bin/project",
+            "program": "${fileDirname}/c3267533.out",
             "args": ["sub","decrypt","UMBC BC CVIM G LTXGU FXCCGLX. UTVPY UTXFXQDEVC.","GHIDXZLMBNOPFQERSTCUVWAKYJ"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -190,14 +211,14 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "gcc build project file",
+            "preLaunchTask": "gcc build final file",
             "miDebuggerPath": "/usr/bin/gdb"
         },
         {
             "name": "gcc build and debug Project substitution encryption",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/bin/project",
+            "program": "${fileDirname}/c3267533.out",
             "args": ["sub","encrypt","This is such a great message. Truly Tremendous.","GHIDXZLMBNOPFQERSTCUVWAKYJ"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -211,14 +232,14 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "gcc build project file",
+            "preLaunchTask": "gcc build final file",
             "miDebuggerPath": "/usr/bin/gdb"
         },
         {
             "name": "gcc build and debug Project rail2 decrypt try",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/bin/project",
+            "program": "${fileDirname}/c3267533.out",
             "args": ["rail2","decrypt","TaTQhet rMir yeBsugmelmsB sc eg.ueu.Ri hasa rnoNLs sTdW","try"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -232,14 +253,14 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "gcc build project file",
+            "preLaunchTask": "gcc build final file",
             "miDebuggerPath": "/usr/bin/gdb"
         },
         {
             "name": "gcc build and debug Project rail2 decrypt",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/bin/project",
+            "program": "${fileDirname}/c3267533.out",
             "args": ["rail2","decrypt","TaTQhet rMir yeBsugmelmsB sc eg.ueu.Ri hasa rnoNLs sTdW","7","4"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -253,14 +274,14 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "gcc build project file",
+            "preLaunchTask": "gcc build final file",
             "miDebuggerPath": "/usr/bin/gdb"
         },
         {
             "name": "gcc build and debug Project rail2 encrypt",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/bin/project",
+            "program": "${fileDirname}/c3267533.out",
             "args": ["rail2","encrypt","This is such a great message. Truly Tremendous.","7","4"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -274,14 +295,14 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "gcc build project file",
+            "preLaunchTask": "gcc build final file",
             "miDebuggerPath": "/usr/bin/gdb"
         },
         {
             "name": "gcc build and debug Project no args",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/bin/project",
+            "program": "${fileDirname}/c3267533.out",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -295,7 +316,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "gcc build project file",
+            "preLaunchTask": "gcc build final file",
             "miDebuggerPath": "/usr/bin/gdb"
         }
     ]

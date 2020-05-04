@@ -115,6 +115,9 @@ void frequencyOrder(int* freqAnalysis, char letterAnalysis[][27]);
 //##############################################################
 int main(int argc, char *argv[])
 {
+    for(int i = 0; i < argc; i++){
+        printf("%d\t%s\n",i,argv[i]);
+    }
     if(argc == 1){
         //no arguments
         main_menu();
@@ -209,7 +212,7 @@ int main(int argc, char *argv[])
         rail2Encrypt(toEncrypt,encrypted,key1,key2);
         printf("Encrypted: %s\n",encrypted);
     }
-    else if (argc == 6 && strcasecmp(argv[1],"rail2") == 0 && strcasecmp(argv[2],"decrypt") == 0  && isdigit(argv[4]) && isdigit(argv[5])){
+    else if (argc == 6 && strcasecmp(argv[1],"rail2") == 0 && strcasecmp(argv[2],"decrypt") == 0 && strcasecmp(argv[4],"try") != 0/* && isdigit(argv[4]) && isdigit(argv[5])*/){
         int key1 = atoi(argv[4]);
         int key2 = atoi(argv[5]);
         char decrypted[MAX_SIZE_FILE_CM];
@@ -427,7 +430,7 @@ int main(int argc, char *argv[])
 
 
     }
-    else if (argc == 7 && strcasecmp(argv[1],"rail2") == 0 && strcasecmp(argv[2],"decrypt") == 0 && strcasecmp(argv[6],"file") == 0  && isdigit(argv[4]) && isdigit(argv[5])){
+    else if (argc == 7 && strcasecmp(argv[1],"rail2") == 0 && strcasecmp(argv[2],"decrypt") == 0 && strcasecmp(argv[6],"file") == 0 && strcasecmp(argv[4],"try") != 0){
         int key1 = atoi(argv[4]);
         int key2 = atoi(argv[5]);
 
@@ -600,14 +603,14 @@ int main(int argc, char *argv[])
         char decrypted[fileSize];
 
         //transcribing file to string.
-        for(char c = fgetc(fileToDecrypt); c != EOF && charCount != MAX_SIZE_FILE_CM; c = fgetc(fileToDecrypt),charCount++){
+        for(char c = fgetc(fileToDecrypt); c != EOF && charCount != fileSize; c = fgetc(fileToDecrypt),charCount++){
             toDecrypt[charCount] = c;
         }
         toDecrypt[charCount] = 0;
 
         printf("Original:  %s\n\n",toDecrypt);
         subCipherDecryptTry(toDecrypt, decrypted, key);
-        printf("\nDecrypted Attempt using decryption key %s: \n\n%s\n\n",key,decrypted);
+        //printf("\nDecrypted Attempt using decryption key %s: \n\n%s\n\n",key,decrypted);
 
         stringToFileQuestion(decrypted);
     }
@@ -1246,6 +1249,7 @@ void substitutionCipherDecrypt(char* toDecrypt,char* decrypted, const char* key)
             decrypted[i] = toDecrypt[i];
         }
     }
+    decrypted[strlen(toDecrypt)] = 0;
 }
 
 void invertSubstitutionKey(const char* key, char* invertedKey)
