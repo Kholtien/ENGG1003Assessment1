@@ -175,11 +175,12 @@ int main(int argc, char *argv[])
     else if (argc == 5 && strcasecmp(argv[1],"rail") == 0 && strcasecmp(argv[2],"encrypt") == 0){
         char encrypted[MAX_SIZE_FILE_CM];
         railFenceEncrypt(argv[3],encrypted,atoi(argv[4]));
-        printf("%s\n",encrypted);
+        printf("\n\n%s\n",encrypted);
     }
-    else if (argc == 5 && strcasecmp(argv[1],"rail") == 0 && strcasecmp(argv[2],"decrypt") == 0 && isdigit(argv[4])){
+    else if (argc == 5 && strcasecmp(argv[1],"rail") == 0 && strcasecmp(argv[2],"decrypt") == 0){
+        char * toDecrypt = argv[3];
         char decrypted[MAX_SIZE_FILE_CM];
-        railFenceDecrypt(argv[3],decrypted,atoi(argv[4]));
+        railFenceDecrypt(toDecrypt,decrypted,atoi(argv[4]));
         printf("%s\n",decrypted);
     }
     else if (argc == 5 && strcasecmp(argv[1],"rail") == 0 && strcasecmp(argv[2],"decrypt") == 0 && strcasecmp(argv[4],"try") == 0){
@@ -189,7 +190,7 @@ int main(int argc, char *argv[])
         railFenceDecryptTry(argv[3],decrypted,railMAX);
         printf("%s\n",decrypted);
     }
-    else if (argc == 6 && strcasecmp(argv[1],"rail2") == 0 && strcasecmp(argv[2],"encrypt") == 0 && isdigit(argv[4]) && isdigit(argv[5])){
+    else if (argc == 6 && strcasecmp(argv[1],"rail2") == 0 && strcasecmp(argv[2],"encrypt") == 0){
         int key1 = atoi(argv[4]);
         int key2 = atoi(argv[5]);
         char encrypted[MAX_SIZE_FILE_CM];
@@ -310,7 +311,7 @@ int main(int argc, char *argv[])
 
 
         railFenceEncrypt(toEncrypt,encrypted,key);
-        printf("Encrypted:\n\n%s\n",encrypted);
+        printf("\n\nEncrypted:\n\n%s\n",encrypted);
 
         stringToFileQuestion(encrypted);
 
