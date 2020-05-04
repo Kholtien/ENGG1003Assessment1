@@ -5,3 +5,4 @@ test/*
 *.out
 testPull/*
 testPull/ENGG1003Assessment1
+*.zip
