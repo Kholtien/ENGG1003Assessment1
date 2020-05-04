@@ -934,7 +934,7 @@ int railFenceDecryptTry(char* toDecrypt,char* decrypted, int keyMAX)
         }
         if(numChars == messageLen){
             railFenceDecrypt(toDecrypt,temp,i);
-            printf("Key: %d\t\tMessage: %s\n",i,temp);
+            printf("\n\nKey: %d\t\tMessage: %s\n",i,temp);
         }
     }
     printf("\n\nWhich key is correct?: ");
