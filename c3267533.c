@@ -145,6 +145,7 @@ int main(int argc, char *argv[])
         printf("#\n");
         printf("########################################################################\n");
         printf("Here's a few examples of commands you can use:\n\n");
+        printf("There may be some segmentation faults in these. Please mark the file I/O ones below:\n\n");
         printf("./c3267533.out rail encrypt 'This is such a great message. Truly Tremendous.' 4\n");
         printf("./c3267533.out rail decrypt 'Ts asTTdWhi haetsa r rnoNi sc r eg.uyeeu.sugmelms' 4\n");
         printf("./c3267533.out rail decrypt 'Ts asTTdWhi haetsa r rnoNi sc r eg.uyeeu.sugmelms' try\n");
@@ -154,6 +155,7 @@ int main(int argc, char *argv[])
         printf("./c3267533.out sub encrypt 'This is such a great message. Truly Tremendous.' GHIDXZLMBNOPFQERSTCUVWAKYJ\n");
         printf("./c3267533.out sub decrypt 'UMBC BC CVIM G LTXGU FXCCGLX. UTVPY UTXFXQDEVC.' GHIDXZLMBNOPFQERSTCUVWAKYJ\n");
         printf("./c3267533.out sub decrypt 'UMBC BC CVIM G LTXGU FXCCGLX. UTVPY UTXFXQDEVC.' try *****\n");
+        printf("########################################################################\nFILEPATH I/O\n");
         printf("\nYou can also replace the message with a filepath and add an additional argument 'file'\n\n");
         printf("./c3267533.out rail encrypt data/alchemist.txt 6 file\n");
         printf("./c3267533.out rail decrypt data/alchemistEncryptedRail6.txt 6 file\n");
