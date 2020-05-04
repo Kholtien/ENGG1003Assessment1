@@ -306,7 +306,7 @@ int main(int argc, char *argv[])
         char encrypted[fileSize];
 
         //transcribing file to string.
-        for(char c = fgetc(fileToEncrypt); c != EOF && charCount != MAX_SIZE_FILE_CM; c = fgetc(fileToEncrypt),charCount++){
+        for(char c = fgetc(fileToEncrypt); c != EOF; c = fgetc(fileToEncrypt),charCount++){
             toEncrypt[charCount] = c;
         }
         toEncrypt[charCount] = 0;
@@ -340,7 +340,7 @@ int main(int argc, char *argv[])
         char toDecrypt[fileSize];
         char decrypted[fileSize];
 
-        for(char c = fgetc(fileToDecrypt); c != EOF && charCount != MAX_SIZE_FILE_CM; c = fgetc(fileToDecrypt),charCount++){
+        for(char c = fgetc(fileToDecrypt); c != EOF; c = fgetc(fileToDecrypt),charCount++){
             toDecrypt[charCount] = c;
         }
         toDecrypt[charCount] = 0;
@@ -371,7 +371,7 @@ int main(int argc, char *argv[])
         char decrypted[fileSize];
 
 
-        for(char c = fgetc(fileToDecrypt); c != EOF && charCount != MAX_SIZE_FILE_CM; c = fgetc(fileToDecrypt),charCount++){
+        for(char c = fgetc(fileToDecrypt); c != EOF; c = fgetc(fileToDecrypt),charCount++){
             toDecrypt[charCount] = c;
         }
         toDecrypt[charCount] = 0;
@@ -407,7 +407,7 @@ int main(int argc, char *argv[])
         char encrypted[fileSize];
 
         //transcribing file to string.
-        for(char c = fgetc(fileToEncrypt); c != EOF && charCount != MAX_SIZE_FILE_CM; c = fgetc(fileToEncrypt),charCount++){
+        for(char c = fgetc(fileToEncrypt); c != EOF; c = fgetc(fileToEncrypt),charCount++){
             toEncrypt[charCount] = c;
         }
         toEncrypt[charCount] = 0;
@@ -457,7 +457,7 @@ int main(int argc, char *argv[])
         char decrypted[fileSize];
 
 
-        for(char c = fgetc(fileToDecrypt); c != EOF && charCount != MAX_SIZE_FILE_CM; c = fgetc(fileToDecrypt),charCount++){
+        for(char c = fgetc(fileToDecrypt); c != EOF; c = fgetc(fileToDecrypt),charCount++){
             toDecrypt[charCount] = c;
         }
         toDecrypt[charCount] = 0;
@@ -503,7 +503,7 @@ int main(int argc, char *argv[])
         char decrypted[fileSize];
 
 
-        for(char c = fgetc(fileToDecrypt); c != EOF && charCount != MAX_SIZE_FILE_CM; c = fgetc(fileToDecrypt),charCount++){
+        for(char c = fgetc(fileToDecrypt); c != EOF; c = fgetc(fileToDecrypt),charCount++){
             toDecrypt[charCount] = c;
         }
         toDecrypt[charCount] = 0;
@@ -537,7 +537,7 @@ int main(int argc, char *argv[])
         char encrypted[fileSize];
 
         //transcribing file to string.
-        for(char c = fgetc(fileToEncrypt); c != EOF && charCount != MAX_SIZE_FILE_CM; c = fgetc(fileToEncrypt),charCount++){
+        for(char c = fgetc(fileToEncrypt); c != EOF; c = fgetc(fileToEncrypt),charCount++){
             toEncrypt[charCount] = c;
         }
         toEncrypt[charCount] = 0;
@@ -572,7 +572,7 @@ int main(int argc, char *argv[])
         char decrypted[fileSize];
 
         //transcribing file to string.
-        for(char c = fgetc(fileToDecrypt); c != EOF && charCount != MAX_SIZE_FILE_CM; c = fgetc(fileToDecrypt),charCount++){
+        for(char c = fgetc(fileToDecrypt); c != EOF; c = fgetc(fileToDecrypt),charCount++){
             toDecrypt[charCount] = c;
         }
         toDecrypt[charCount] = 0;
